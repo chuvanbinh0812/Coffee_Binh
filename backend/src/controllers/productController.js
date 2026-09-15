@@ -19,7 +19,6 @@ export const getProductById = async (req, res) => {
   }
 };
 
-<<<<<<< HEAD
 // Parse an JSON string an toàn, trả về mảng rỗng nếu lỗi/không có
 const safeParseArray = (value) => {
   if (!value) return [];
@@ -32,8 +31,6 @@ const safeParseArray = (value) => {
   }
 };
 
-=======
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 // FormData gửi tất cả dạng string → cần parse đúng kiểu
 const parseProductData = (body, file) => {
   const data = {
@@ -44,7 +41,6 @@ const parseProductData = (body, file) => {
     stock:        Number(body.stock),
     isNew:        body.isNew === 'true',
     isBestSeller: body.isBestSeller === 'true',
-<<<<<<< HEAD
     // sizes/toppings gửi lên dạng JSON string: [{"name":"M","priceDelta":5000}, ...]
     sizes: safeParseArray(body.sizes).map(s => ({
       name: String(s.name || '').trim(),
@@ -58,10 +54,6 @@ const parseProductData = (body, file) => {
     sugarIceOptions: body.sugarIceOptions
       ? body.sugarIceOptions.split(',').map(s => s.trim()).filter(Boolean)
       : []
-=======
-    sizes:        body.sizes ? body.sizes.split(',').map(s => s.trim()).filter(Boolean) : [],
-    colors:       body.colors ? body.colors.split(',').map(c => c.trim()).filter(Boolean) : []
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
   };
   if (file) {
     data.image = `/uploads/products/${file.filename}`;
@@ -107,8 +99,4 @@ export const deleteProduct = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-<<<<<<< HEAD
 };
-=======
-};
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75

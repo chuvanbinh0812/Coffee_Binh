@@ -39,16 +39,6 @@
 
         <router-link to="/contact" class="nav-link">Liên Hệ</router-link>
 
-<<<<<<< HEAD
-        <router-link v-if="!auth.isAdmin" to="/cart" class="nav-link position-relative">
-          Giỏ Hàng
-          <span v-if="cartTotal > 0" class="cart-count">{{ cartTotal }}</span>
-        </router-link>
-
-        <router-link v-if="!auth.isLoggedIn" to="/login" class="nav-link nav-link-cta">Đăng Nhập</router-link>
-
-        <template v-else>
-=======
         <router-link v-if="!auth.isLoggedIn" to="/login" class="nav-link nav-link-cta">Đăng Nhập</router-link>
 
         <template v-else>
@@ -57,7 +47,6 @@
             <span v-if="cartTotal > 0" class="cart-count">{{ cartTotal }}</span>
           </a>
 
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
           <div class="account-dropdown-container">
             <button class="btn-account">
               <span class="account-name">{{ auth.user?.name }}</span>
@@ -74,17 +63,10 @@
                 <router-link to="/profile" class="account-menu-item">Hồ sơ tài khoản</router-link>
                 <router-link to="/my-orders" class="account-menu-item">Đơn hàng của tôi</router-link>
                 <router-link to="/wishlist" class="account-menu-item">Yêu thích</router-link>
-<<<<<<< HEAD
-                <router-link to="/cart" class="account-menu-item">
-                  Giỏ hàng
-                  <span v-if="cartTotal > 0" class="badge bg-danger ms-1">{{ cartTotal }}</span>
-                </router-link>
-=======
                 <a href="#" class="account-menu-item" @click.prevent="cartStore.openCart()">
                   Giỏ hàng
                   <span v-if="cartTotal > 0" class="badge bg-danger ms-1">{{ cartTotal }}</span>
                 </a>
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
               </template>
 
               <template v-else>
@@ -106,10 +88,6 @@
       <router-link to="/products" class="mobile-link" @click="mobileOpen = false">Thực Đơn</router-link>
       <router-link to="/about" class="mobile-link" @click="mobileOpen = false">Về Chúng Tôi</router-link>
       <router-link to="/contact" class="mobile-link" @click="mobileOpen = false">Liên Hệ</router-link>
-<<<<<<< HEAD
-      <router-link v-if="!auth.isAdmin" to="/cart" class="mobile-link" @click="mobileOpen = false">Giỏ Hàng</router-link>
-=======
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
       <router-link v-if="!auth.isLoggedIn" to="/login" class="mobile-link" @click="mobileOpen = false">Đăng Nhập</router-link>
       <a v-else href="#" class="mobile-link" @click.prevent="logout">Đăng xuất</a>
     </div>

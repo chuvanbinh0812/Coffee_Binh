@@ -18,7 +18,6 @@
         🛒 Giỏ hàng trống
       </div>
 
-<<<<<<< HEAD
       <div v-for="item in cart.items" :key="item.lineId" class="cart-item">
         <img :src="item.image" :alt="item.name" />
         <div class="cart-item-info">
@@ -28,12 +27,6 @@
             <span v-if="item.sugarIce"> · {{ item.sugarIce }}</span>
             <span v-if="item.toppings?.length"> · {{ item.toppings.join(', ') }}</span>
           </div>
-=======
-      <div v-for="item in cart.items" :key="item._id || item.id" class="cart-item">
-        <img :src="item.image" :alt="item.name" />
-        <div class="cart-item-info">
-          <div class="cart-item-name">{{ item.name }}</div>
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
           <div class="cart-item-qty-row">
             <div class="qty-control">
               <button @click="decrease(item)">−</button>
@@ -43,11 +36,7 @@
           </div>
           <div class="cart-item-price">{{ formatPrice(item.price) }} / chiếc</div>
         </div>
-<<<<<<< HEAD
         <button class="btn-remove" @click="cart.removeItem(item.lineId)">Xóa</button>
-=======
-        <button class="btn-remove" @click="cart.removeItem(item._id || item.id)">Xóa</button>
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
       </div>
     </div>
 
@@ -56,12 +45,9 @@
         <span>Tạm tính:</span>
         <strong>{{ formatPrice(cart.totalPrice) }}</strong>
       </div>
-<<<<<<< HEAD
       <router-link to="/cart" class="view-cart-link" @click="cart.closeCart()">
         Xem giỏ hàng đầy đủ →
       </router-link>
-=======
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
       <div class="cart-actions">
         <router-link to="/checkout" class="btn btn-brown flex-grow-1" @click="cart.closeCart()">
           Thanh toán
@@ -82,7 +68,6 @@ const cart = useCartStore();
 const formatPrice = (p) => (p || 0).toLocaleString('vi-VN') + ' ₫';
 
 const increase = (item) => {
-<<<<<<< HEAD
   cart.updateQuantity(item.lineId, item.quantity + 1);
 };
 const decrease = (item) => {
@@ -90,16 +75,6 @@ const decrease = (item) => {
     cart.updateQuantity(item.lineId, item.quantity - 1);
   } else {
     cart.removeItem(item.lineId);
-=======
-  cart.updateQuantity(item._id || item.id, item.quantity + 1);
-};
-const decrease = (item) => {
-  const id = item._id || item.id;
-  if (item.quantity > 1) {
-    cart.updateQuantity(id, item.quantity - 1);
-  } else {
-    cart.removeItem(id);
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
   }
 };
 </script>
@@ -174,14 +149,11 @@ const decrease = (item) => {
   font-size: 0.92rem;
   margin-bottom: 4px;
 }
-<<<<<<< HEAD
 .cart-item-variant {
   font-size: 0.76rem;
   color: #888;
   margin-bottom: 4px;
 }
-=======
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 .cart-item-qty-row {
   margin-bottom: 4px;
 }
@@ -236,7 +208,6 @@ const decrease = (item) => {
   font-size: 1.05rem;
   margin-bottom: 14px;
 }
-<<<<<<< HEAD
 .view-cart-link {
   display: block;
   text-align: center;
@@ -247,8 +218,6 @@ const decrease = (item) => {
   margin-bottom: 12px;
 }
 .view-cart-link:hover { text-decoration: underline; }
-=======
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 .cart-actions {
   display: flex;
   gap: 8px;

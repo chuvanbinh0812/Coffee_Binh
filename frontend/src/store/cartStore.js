@@ -14,7 +14,6 @@ export const useCartStore = defineStore('cart', {
       return product._id || product.id;
     },
 
-<<<<<<< HEAD
     // Tạo khóa duy nhất cho từng biến thể (size + đường/đá + topping) của cùng 1 sản phẩm
     _makeLineId(productId, options = {}) {
       const toppings = [...(options.toppings || [])].sort().join('+');
@@ -53,24 +52,6 @@ export const useCartStore = defineStore('cart', {
 
     updateQuantity(lineId, qty) {
       const item = this.items.find(i => i.lineId === lineId);
-=======
-    addItem(product, quantity = 1) {
-      const pid = this._getId(product);
-      const existing = this.items.find(i => this._getId(i) === pid);
-      if (existing) {
-        existing.quantity += quantity;
-      } else {
-        this.items.push({ ...product, _id: pid, id: pid, quantity });
-      }
-    },
-
-    removeItem(id) {
-      this.items = this.items.filter(i => this._getId(i) !== id);
-    },
-
-    updateQuantity(id, qty) {
-      const item = this.items.find(i => this._getId(i) === id);
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
       if (item) item.quantity = qty;
     },
 
@@ -82,8 +63,4 @@ export const useCartStore = defineStore('cart', {
     closeCart() { this.isOpen = false; },
     toggleCart() { this.isOpen = !this.isOpen; }
   }
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75

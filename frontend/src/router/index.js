@@ -3,10 +3,7 @@ import Home from '../views/Home.vue';
 import Products from '../views/Products.vue';
 import About from '../views/About.vue';
 import Contact from '../views/Contact.vue';
-<<<<<<< HEAD
 import Cart from '../views/Cart.vue';
-=======
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 import Checkout from '../views/Checkout.vue';
 import Login from '../views/Login.vue';
 import Admin from '../views/Admin.vue';
@@ -14,10 +11,7 @@ import AdminStats from '../views/AdminStats.vue';
 import AdminProducts from '../views/AdminProducts.vue';
 import AdminOrders from '../views/AdminOrders.vue';
 import AdminUsers from '../views/AdminUsers.vue';
-<<<<<<< HEAD
 import AdminIngredients from '../views/AdminIngredients.vue';
-=======
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 import AdminChat from '../components/AdminChat.vue';
 import MyOrders from '../views/MyOrders.vue';
 import MyWishlist from '../views/MyWishlist.vue';
@@ -29,10 +23,7 @@ const routes = [
   { path: '/products', component: Products },
   { path: '/about', component: About },
   { path: '/contact', component: Contact },
-<<<<<<< HEAD
   { path: '/cart', component: Cart },
-=======
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
   { path: '/checkout', component: Checkout, meta: { requiresAuth: true } },
   { path: '/login', component: Login },
   { path: '/products/:id', component: ProductDetail },
@@ -48,10 +39,7 @@ const routes = [
       { path: 'products', component: AdminProducts },
       { path: 'orders',   component: AdminOrders },
       { path: 'users',    component: AdminUsers },
-<<<<<<< HEAD
       { path: 'ingredients', component: AdminIngredients },
-=======
->>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
       { path: 'chat',     component: AdminChat }
     ]
   },
