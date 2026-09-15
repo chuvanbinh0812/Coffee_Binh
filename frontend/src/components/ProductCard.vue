@@ -27,16 +27,23 @@
         ★ {{ product.rating }} ({{ product.reviews }})
       </router-link>
 
+<<<<<<< HEAD
       <button @click="addToCart" class="btn-add-cart">
         {{ needsOptions ? 'Chọn size / topping' : 'Thêm vào giỏ' }}
       </button>
+=======
+      <button @click="addToCart" class="btn-add-cart">Thêm vào giỏ</button>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
     </div>
   </div>
 </template>
 
 <script setup>
+<<<<<<< HEAD
 import { computed } from 'vue';
 import { useRouter } from 'vue-router';
+=======
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 import { useCartStore } from '../store/cartStore';
 import { useWishlistStore } from '../store/wishlistStore';
 import { useAuthStore } from '../store/authStore';
@@ -45,6 +52,7 @@ const props = defineProps(['product']);
 const cartStore = useCartStore();
 const wishlist = useWishlistStore();
 const auth = useAuthStore();
+<<<<<<< HEAD
 const router = useRouter();
 
 const formatPrice = (price) => price.toLocaleString('vi-VN') + ' ₫';
@@ -60,6 +68,13 @@ const addToCart = () => {
     return;
   }
   cartStore.addItem(props.product, 1, { unitPrice: props.product.price });
+=======
+
+const formatPrice = (price) => price.toLocaleString('vi-VN') + ' ₫';
+
+const addToCart = () => {
+  cartStore.addItem(props.product);
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 };
 
 const toggleLike = async () => {

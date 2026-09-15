@@ -3,6 +3,7 @@
 
     <!-- Toolbar -->
     <div class="toolbar mb-4">
+<<<<<<< HEAD
       <div>
         <span class="page-eyebrow">Thực đơn</span>
         <h5 class="page-title">Tất cả món ({{ products.length }})</h5>
@@ -20,12 +21,32 @@
         </select>
         <button class="btn-add" @click="openAddForm">+ Thêm món mới</button>
       </div>
+=======
+      <div class="toolbar-left">
+        <h5 class="mb-0">Tất cả món ({{ products.length }})</h5>
+        <input
+          v-model="search"
+          type="text"
+          class="form-control form-control-sm search-box"
+          placeholder="Tìm theo tên món..."
+        />
+        <select v-model="filterCategory" class="form-select form-select-sm cat-filter">
+          <option value="">Tất cả danh mục</option>
+          <option v-for="c in categoryOptions" :key="c" :value="c">{{ c }}</option>
+        </select>
+      </div>
+      <button class="btn-add" @click="openAddForm">+ Thêm món mới</button>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
     </div>
 
     <!-- Add/Edit Form -->
     <div v-if="showAddForm || editingProduct" class="product-form-card mb-4">
       <div class="form-card-header">
+<<<<<<< HEAD
         <h5 class="mb-0">{{ editingProduct ? 'Sửa món' : 'Thêm món mới' }}</h5>
+=======
+        <h5 class="mb-0">{{ editingProduct ? '✏️ Sửa món' : '☕ Thêm món mới' }}</h5>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
         <button class="btn-close-form" @click="cancelForm">✕</button>
       </div>
       <form @submit.prevent="saveProduct" class="p-4">
@@ -41,6 +62,7 @@
               <option v-for="c in categoryOptions" :key="c" :value="c">{{ c }}</option>
             </select>
           </div>
+<<<<<<< HEAD
           <div class="col-md-6">
             <label class="form-label">Giá bán cơ bản (₫)</label>
             <input type="number" class="form-control" v-model="productForm.price" placeholder="35000" required />
@@ -84,6 +106,24 @@
             <input type="text" class="form-control" v-model="productForm.sugarIceOptions" placeholder="100% đường, 70% đường, 50% đường, Ít đá, Không đá" />
           </div>
 
+=======
+          <div class="col-md-4">
+            <label class="form-label">Giá bán (₫)</label>
+            <input type="number" class="form-control" v-model="productForm.price" placeholder="35000" required />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Số lượng tồn</label>
+            <input type="number" class="form-control" v-model="productForm.stock" placeholder="50" required />
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Size ly</label>
+            <input type="text" class="form-control" v-model="productForm.sizes" placeholder="S, M, L" />
+          </div>
+          <div class="col-12">
+            <label class="form-label">Tùy chọn thêm <span class="text-muted small">(mức đường/đá, topping...)</span></label>
+            <input type="text" class="form-control" v-model="productForm.colors" placeholder="Ít đường, Nhiều đá, Thêm trân châu" />
+          </div>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
           <div class="col-12">
             <label class="form-label">Mô tả</label>
             <textarea class="form-control" v-model="productForm.description" placeholder="Mô tả hương vị, thành phần..." rows="3"></textarea>
@@ -126,8 +166,13 @@
 
     <!-- Products Grid -->
     <div v-if="filteredProducts.length === 0" class="empty-state">
+<<<<<<< HEAD
       <div class="hanko-stamp empty-stamp">金</div>
       <p class="text-muted mt-3">Chưa có món nào phù hợp.</p>
+=======
+      <div class="empty-icon">☕</div>
+      <p class="text-muted">Chưa có món nào phù hợp.</p>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
     </div>
 
     <div v-else class="product-grid">
@@ -141,11 +186,14 @@
         <div class="product-card-body">
           <div class="pc-category">{{ product.category }}</div>
           <h6 class="pc-name">{{ product.name }}</h6>
+<<<<<<< HEAD
           <div class="pc-variant" v-if="product.sizes?.length || product.toppings?.length">
             <span v-if="product.sizes?.length">{{ product.sizes.length }} size</span>
             <span v-if="product.sizes?.length && product.toppings?.length"> · </span>
             <span v-if="product.toppings?.length">{{ product.toppings.length }} topping</span>
           </div>
+=======
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
           <div class="pc-footer">
             <span class="pc-price">{{ formatPrice(product.price) }}</span>
             <span class="pc-stock" :class="{ low: product.stock > 0 && product.stock <= 5 }">
@@ -183,16 +231,23 @@ const emptyForm = () => ({
   name: '', category: '', price: 0,
   description: '', stock: 10,
   isNew: false, isBestSeller: false,
+<<<<<<< HEAD
   sizes: [], toppings: [], sugarIceOptions: ''
+=======
+  sizes: '', colors: ''
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 });
 
 const productForm = ref(emptyForm());
 
 const formatPrice = (price) => price.toLocaleString('vi-VN') + ' ₫';
 
+<<<<<<< HEAD
 const addSize = () => productForm.value.sizes.push({ name: '', priceDelta: 0 });
 const addTopping = () => productForm.value.toppings.push({ name: '', price: 0 });
 
+=======
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 const filteredProducts = computed(() => {
   return products.value.filter(p => {
     const matchesSearch = !search.value || p.name?.toLowerCase().includes(search.value.toLowerCase());
@@ -237,6 +292,7 @@ const saveProduct = async () => {
     formData.append('description', productForm.value.description);
     formData.append('isNew', productForm.value.isNew);
     formData.append('isBestSeller', productForm.value.isBestSeller);
+<<<<<<< HEAD
     formData.append('sizes', JSON.stringify(
       productForm.value.sizes.filter(s => s.name?.trim())
     ));
@@ -244,6 +300,10 @@ const saveProduct = async () => {
       productForm.value.toppings.filter(t => t.name?.trim())
     ));
     formData.append('sugarIceOptions', productForm.value.sugarIceOptions);
+=======
+    formData.append('sizes', productForm.value.sizes);
+    formData.append('colors', productForm.value.colors);
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
     if (imageFile.value) {
       formData.append('image', imageFile.value);
     }
@@ -273,9 +333,14 @@ const editProduct = (product) => {
     description: product.description,
     isNew: product.isNew,
     isBestSeller: product.isBestSeller,
+<<<<<<< HEAD
     sizes: (product.sizes || []).map(s => ({ ...s })),
     toppings: (product.toppings || []).map(t => ({ ...t })),
     sugarIceOptions: (product.sugarIceOptions || []).join(', ')
+=======
+    sizes: (product.sizes || []).join(', '),
+    colors: (product.colors || []).join(', ')
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
   };
   imageFile.value = null;
   imagePreview.value = '';
@@ -305,6 +370,7 @@ onMounted(loadProducts);
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 .products-admin { font-family: var(--font-body); }
 
 .toolbar {
@@ -370,21 +436,65 @@ onMounted(loadProducts);
 }
 .form-card-header {
   background: var(--paper-dim);
+=======
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.search-box { width: 220px; }
+.cat-filter { width: 170px; }
+
+.btn-add {
+  background: #6f4423;
+  color: #f8f0e1;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: background 0.2s;
+}
+.btn-add:hover { background: #3e2a17; }
+
+/* ===== Form card ===== */
+.product-form-card {
+  background: #f8f0e1;
+  border: 1px solid #ddc9a0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.form-card-header {
+  background: #efe1c3;
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
   padding: 14px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+<<<<<<< HEAD
   border-bottom: 1px solid var(--line);
 }
 .form-card-header h5 {
   font-family: var(--font-display);
   letter-spacing: 0.5px;
   color: var(--ink);
+=======
+  border-bottom: 1px solid #ddc9a0;
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 }
 .btn-close-form {
   background: none;
   border: none;
   font-size: 1.1rem;
+<<<<<<< HEAD
   color: var(--ink-soft);
   cursor: pointer;
 }
@@ -456,6 +566,40 @@ onMounted(loadProducts);
   color: var(--line);
   border-color: var(--line);
 }
+=======
+  color: #6b5646;
+  cursor: pointer;
+}
+.form-label { font-size: 0.85rem; font-weight: 600; color: #2a1c12; }
+.img-preview {
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #ddc9a0;
+}
+
+.btn-save {
+  background: #6f4423;
+  color: #f8f0e1;
+  border: none;
+  padding: 9px 22px;
+  border-radius: 4px;
+  font-weight: 600;
+}
+.btn-save:hover { background: #3e2a17; }
+.btn-save:disabled { opacity: 0.6; }
+.btn-cancel {
+  background: transparent;
+  border: 1px solid #ddc9a0;
+  color: #2a1c12;
+  padding: 9px 22px;
+  border-radius: 4px;
+}
+
+/* ===== Empty state ===== */
+.empty-state { text-align: center; padding: 60px 0; }
+.empty-icon { font-size: 3rem; margin-bottom: 10px; }
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 
 /* ===== Product grid ===== */
 .product-grid {
@@ -464,6 +608,7 @@ onMounted(loadProducts);
   gap: 18px;
 }
 .product-card {
+<<<<<<< HEAD
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 3px;
@@ -475,6 +620,18 @@ onMounted(loadProducts);
 .product-card-img { position: relative; height: 140px; overflow: hidden; }
 .product-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
 .product-card:hover .product-card-img img { transform: scale(1.05); }
+=======
+  background: #f8f0e1;
+  border: 1px solid #ddc9a0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s, border-color 0.2s;
+}
+.product-card:hover { transform: translateY(-3px); border-color: #6f4423; }
+
+.product-card-img { position: relative; height: 140px; }
+.product-card-img img { width: 100%; height: 100%; object-fit: cover; }
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 
 .pc-badge {
   position: absolute;
@@ -485,14 +642,22 @@ onMounted(loadProducts);
   letter-spacing: 0.5px;
   padding: 3px 8px;
   border-radius: 3px;
+<<<<<<< HEAD
   color: var(--paper);
 }
 .pc-new { background: var(--indigo); }
 .pc-hot { background: var(--hanko); }
+=======
+  color: #f8f0e1;
+}
+.pc-new { background: #6f4423; }
+.pc-hot { background: #b3502c; }
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 .pc-out { left: auto; right: 8px; top: 8px; background: #555; }
 
 .product-card-body { padding: 14px; }
 .pc-category {
+<<<<<<< HEAD
   font-family: var(--font-mono);
   font-size: 0.64rem;
   text-transform: uppercase;
@@ -510,6 +675,19 @@ onMounted(loadProducts);
   font-size: 0.72rem;
   color: var(--hanko);
   margin-bottom: 8px;
+=======
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #6b5646;
+  margin-bottom: 2px;
+}
+.pc-name {
+  font-weight: 700;
+  color: #2a1c12;
+  margin-bottom: 8px;
+  min-height: 2.4em;
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 }
 .pc-footer {
   display: flex;
@@ -517,14 +695,21 @@ onMounted(loadProducts);
   align-items: center;
   margin-bottom: 10px;
 }
+<<<<<<< HEAD
 .pc-price { font-weight: 700; color: var(--indigo); }
 .pc-stock { font-size: 0.78rem; color: var(--ink-soft); }
 .pc-stock.low { color: var(--hanko); font-weight: 600; }
+=======
+.pc-price { font-weight: 700; color: #6f4423; }
+.pc-stock { font-size: 0.78rem; color: #6b5646; }
+.pc-stock.low { color: #b3502c; font-weight: 600; }
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 
 .pc-actions { display: flex; gap: 8px; }
 .btn-edit, .btn-delete {
   flex: 1;
   padding: 6px 0;
+<<<<<<< HEAD
   border-radius: 3px;
   font-size: 0.8rem;
   border: 1px solid var(--line);
@@ -540,4 +725,16 @@ onMounted(loadProducts);
   .toolbar-actions { width: 100%; }
   .search-box, .cat-filter { flex: 1; width: auto; }
 }
+=======
+  border-radius: 4px;
+  font-size: 0.8rem;
+  border: 1px solid #ddc9a0;
+  background: transparent;
+  color: #2a1c12;
+  transition: background 0.15s;
+}
+.btn-edit:hover { background: #efe1c3; }
+.btn-delete { color: #b3502c; border-color: #b3502c; }
+.btn-delete:hover { background: #f6e9e8; }
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 </style>

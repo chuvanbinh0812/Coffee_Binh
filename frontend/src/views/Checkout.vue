@@ -10,6 +10,7 @@
       <!-- Tóm tắt đơn hàng -->
       <div class="card p-3 mb-4">
         <h6 class="mb-3">Đơn hàng của bạn</h6>
+<<<<<<< HEAD
         <div v-for="item in cart.items" :key="item.lineId" class="mb-2">
           <div class="d-flex justify-content-between">
             <span>{{ item.name }} x{{ item.quantity }}</span>
@@ -20,6 +21,11 @@
             <span v-if="item.sugarIce"> · {{ item.sugarIce }}</span>
             <span v-if="item.toppings?.length"> · {{ item.toppings.join(', ') }}</span>
           </div>
+=======
+        <div v-for="item in cart.items" :key="item._id || item.id" class="d-flex justify-content-between mb-2">
+          <span>{{ item.name }} x{{ item.quantity }}</span>
+          <span>{{ formatPrice(item.price * item.quantity) }}</span>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
         </div>
         <hr />
         <div class="d-flex justify-content-between fw-bold">
@@ -28,6 +34,7 @@
         </div>
       </div>
 
+<<<<<<< HEAD
       <!-- Hình thức nhận hàng -->
       <div class="card p-4 mb-4">
         <h6 class="mb-3">Hình thức nhận hàng</h6>
@@ -62,11 +69,29 @@
               <input type="text" class="form-control" v-model="shippingAddress.city" placeholder="Thành phố" required />
             </div>
             <div :class="deliveryMethod === 'delivery' ? 'col-md-6' : 'col-12'">
+=======
+      <!-- Form thông tin giao hàng -->
+      <div class="card p-4">
+        <h6 class="mb-3">Thông tin nhận hàng</h6>
+        <form @submit.prevent="placeOrder">
+          <div class="row g-3">
+            <div class="col-12">
+              <input type="text" class="form-control" v-model="shippingAddress.street" placeholder="Địa chỉ nhận hàng" required />
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" v-model="shippingAddress.city" placeholder="Thành phố" required />
+            </div>
+            <div class="col-md-6">
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
               <input type="text" class="form-control" v-model="shippingAddress.phone" placeholder="Số điện thoại" required />
             </div>
             <div class="col-12">
               <select class="form-select" v-model="paymentMethod" required>
+<<<<<<< HEAD
                 <option value="cod">{{ deliveryMethod === 'pickup' ? 'Thanh toán tại quầy' : 'Thanh toán khi nhận hàng (COD)' }}</option>
+=======
+                <option value="cod">Thanh toán khi nhận hàng (COD)</option>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
                 <option value="banking">Chuyển khoản ngân hàng</option>
                 <option value="momo">Ví MoMo</option>
               </select>
@@ -95,7 +120,10 @@ const auth = useAuthStore();
 const router = useRouter();
 const loading = ref(false);
 
+<<<<<<< HEAD
 const deliveryMethod = ref('delivery');
+=======
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 const shippingAddress = ref({ street: '', city: '', phone: '' });
 const paymentMethod = ref('cod');
 
@@ -112,6 +140,7 @@ const placeOrder = async () => {
   try {
     const orderData = {
       items: cart.items.map(item => ({
+<<<<<<< HEAD
         productId: item.productId || item._id || item.id,
         quantity: item.quantity,
         size: item.size || '',
@@ -120,6 +149,11 @@ const placeOrder = async () => {
         note: item.note || ''
       })),
       deliveryMethod: deliveryMethod.value,
+=======
+        productId: item._id || item.id,
+        quantity: item.quantity
+      })),
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
       shippingAddress: shippingAddress.value,
       paymentMethod: paymentMethod.value
     };
@@ -151,4 +185,8 @@ const placeOrder = async () => {
   color: white;
 }
 .btn-brown:disabled { opacity: 0.7; cursor: not-allowed; }
+<<<<<<< HEAD
 </style>
+=======
+</style>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75

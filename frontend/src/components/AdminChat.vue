@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
   <div class="chat-page">
     <div class="page-head mb-4">
       <span class="page-eyebrow">Hỗ trợ khách hàng</span>
@@ -74,17 +75,106 @@
             <button class="btn-send" @click="sendReply" :disabled="!replyText.trim()">Gửi</button>
           </div>
         </template>
+=======
+  <div class="container-fluid py-4">
+
+    <!-- Tab chuyển giữa Chat và Liên hệ -->
+    <ul class="nav nav-tabs mb-4">
+      <li class="nav-item">
+        <button class="nav-link" :class="{ active: activeTab === 'chat' }" @click="activeTab = 'chat'">
+          💬 Chat realtime
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="nav-link" :class="{ active: activeTab === 'contact' }" @click="activeTab = 'contact'">
+          📩 Liên hệ
+          <span v-if="unreadContacts > 0" class="badge bg-danger ms-1">{{ unreadContacts }}</span>
+        </button>
+      </li>
+    </ul>
+
+    <!-- ===== PHẦN CHAT REALTIME ===== -->
+    <div v-if="activeTab === 'chat'">
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div class="card-header bg-brown text-white">Khách đang chat</div>
+            <div class="list-group list-group-flush">
+              <div
+                v-for="user in chatStore.chatUsers"
+                :key="user.socketId"
+                class="list-group-item list-group-item-action"
+                :class="{ active: selectedUser?.socketId === user.socketId }"
+                @click="selectUser(user)"
+              >
+                <div class="d-flex justify-content-between">
+                  <span>👤 {{ user.userName }}</span>
+                  <span v-if="user.unread > 0" class="badge bg-danger">{{ user.unread }}</span>
+                </div>
+                <small class="text-muted text-truncate d-block">{{ user.lastMsg }}</small>
+              </div>
+              <div v-if="chatStore.chatUsers.length === 0" class="list-group-item text-center text-muted py-4">
+                Chưa có khách nào nhắn tin
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-8">
+          <div class="card h-100">
+            <div v-if="!selectedUser" class="card-body d-flex align-items-center justify-content-center text-muted">
+              Chọn một khách hàng để bắt đầu chat
+            </div>
+            <template v-else>
+              <div class="card-header bg-brown text-white">
+                💬 {{ selectedUser.userName }}
+              </div>
+              <div class="card-body chat-messages" ref="messagesEl">
+                <div
+                  v-for="(msg, i) in currentMessages"
+                  :key="i"
+                  class="chat-msg"
+                  :class="msg.sender === 'admin' ? 'msg-admin' : 'msg-user'"
+                >
+                  <div class="msg-bubble">{{ msg.text }}</div>
+                  <div class="msg-time">{{ msg.time }}</div>
+                </div>
+              </div>
+              <div class="card-footer p-2">
+                <div class="input-group">
+                  <input
+                    v-model="replyText"
+                    @keyup.enter="sendReply"
+                    type="text"
+                    class="form-control"
+                    placeholder="Nhập phản hồi..."
+                  />
+                  <button class="btn btn-brown" @click="sendReply" :disabled="!replyText.trim()">Gửi</button>
+                </div>
+              </div>
+            </template>
+          </div>
+        </div>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
       </div>
     </div>
 
     <!-- ===== PHẦN LIÊN HỆ ===== -->
     <div v-if="activeTab === 'contact'">
       <div v-if="loadingContacts" class="text-center py-4">
+<<<<<<< HEAD
         <div class="spinner-border" style="color: var(--indigo)"></div>
       </div>
 
       <div v-else-if="contacts.length === 0" class="empty-users py-5 text-center">
         Chưa có liên hệ nào
+=======
+        <div class="spinner-border text-secondary"></div>
+      </div>
+
+      <div v-else-if="contacts.length === 0" class="text-center text-muted py-5">
+        📩 Chưa có liên hệ nào
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
       </div>
 
       <div v-else class="contact-list">
@@ -97,6 +187,7 @@
           <div class="contact-card-header">
             <div>
               <span class="fw-semibold">{{ c.name }}</span>
+<<<<<<< HEAD
               <span class="mono-cell ms-2">{{ c.email }}</span>
               <span v-if="!c.isRead" class="new-tag ms-2">Mới</span>
             </div>
@@ -108,6 +199,19 @@
                 @click="markRead(c._id)"
               >✓ Đã đọc</button>
               <button class="btn-del-contact" @click="deleteContact(c._id)">🗑</button>
+=======
+              <span class="text-muted small ms-2">{{ c.email }}</span>
+              <span v-if="!c.isRead" class="badge bg-danger ms-2 small">Mới</span>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <span class="text-muted small">{{ formatDate(c.createdAt) }}</span>
+              <button
+                v-if="!c.isRead"
+                class="btn btn-sm btn-outline-secondary"
+                @click="markRead(c._id)"
+              >✓ Đã đọc</button>
+              <button class="btn btn-sm btn-outline-danger" @click="deleteContact(c._id)">🗑</button>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
             </div>
           </div>
           <div class="contact-message">{{ c.message }}</div>
@@ -227,6 +331,13 @@ onMounted(() => {
   // Nhận liên hệ mới realtime
   socket.on('new_contact', (data) => {
     contacts.value.unshift({ ...data, _id: data.id, isRead: false });
+<<<<<<< HEAD
+=======
+    // Nếu đang ở tab liên hệ thì không cần thông báo riêng
+    if (activeTab.value !== 'contact') {
+      // Badge tự cập nhật qua unreadContacts computed
+    }
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
   });
 });
 
@@ -238,6 +349,7 @@ watch(currentMessages, scrollToBottom);
 </script>
 
 <style scoped>
+<<<<<<< HEAD
 .chat-page { font-family: var(--font-body); }
 
 .page-eyebrow {
@@ -377,12 +489,25 @@ watch(currentMessages, scrollToBottom);
   flex-direction: column;
   gap: 10px;
   min-height: 300px;
+=======
+.bg-brown { background-color: #2b1c12; }
+.btn-brown { background-color: #2b1c12; color: white; border-color: #2b1c12; }
+.btn-brown:hover { background-color: #4a4a4a; color: white; }
+
+.chat-messages {
+  height: 340px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 }
 .chat-msg { display: flex; flex-direction: column; }
 .msg-user { align-items: flex-start; }
 .msg-admin { align-items: flex-end; }
 .msg-bubble {
   max-width: 75%;
+<<<<<<< HEAD
   padding: 9px 13px;
   border-radius: 12px;
   font-size: 0.88rem;
@@ -419,10 +544,22 @@ watch(currentMessages, scrollToBottom);
 }
 .btn-send:hover:not(:disabled) { background: var(--indigo-deep); }
 .btn-send:disabled { opacity: 0.5; }
+=======
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  word-break: break-word;
+}
+.msg-user .msg-bubble { background: #efe1c3; color: #333; }
+.msg-admin .msg-bubble { background: #2b1c12; color: white; }
+.msg-time { font-size: 10px; color: #aaa; margin-top: 2px; }
+.list-group-item.active { background-color: #f5ebe6; color: #333; border-color: #e0d5d0; }
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 
 /* Liên hệ */
 .contact-list { display: flex; flex-direction: column; gap: 12px; }
 .contact-card {
+<<<<<<< HEAD
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 3px;
@@ -430,10 +567,23 @@ watch(currentMessages, scrollToBottom);
   border-left: 3px solid transparent;
 }
 .contact-card.unread { border-left-color: var(--hanko); background: #fffbf0; }
+=======
+  background: white;
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(26, 26, 26,0.08);
+  border-left: 4px solid transparent;
+}
+.contact-card.unread {
+  border-left-color: #a8451f;
+  background: #fffbf0;
+}
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 .contact-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+<<<<<<< HEAD
   flex-wrap: wrap;
   gap: 6px;
   margin-bottom: 10px;
@@ -469,3 +619,17 @@ watch(currentMessages, scrollToBottom);
   .users-panel { max-height: 220px; }
 }
 </style>
+=======
+  margin-bottom: 10px;
+}
+.contact-message {
+  color: #555;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.nav-link { cursor: pointer; color: #2b1c12; }
+.nav-link.active { color: #2b1c12; border-bottom: 2px solid #2b1c12; background: transparent; }
+</style>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75

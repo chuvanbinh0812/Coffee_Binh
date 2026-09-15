@@ -15,11 +15,19 @@
       <div class="card-header d-flex justify-content-between align-items-center">
         <span>Đơn hàng #{{ order._id.slice(-6) }}</span>
         <span class="badge" :class="{
+<<<<<<< HEAD
           'bg-secondary': order.status === 'new',
           'bg-info':      order.status === 'confirmed',
           'bg-warning':   order.status === 'preparing',
           'bg-success':   order.status === 'completed',
           'bg-danger':    order.status === 'cancelled'
+=======
+          'bg-warning': order.status === 'pending',
+          'bg-info':    order.status === 'processing',
+          'bg-primary': order.status === 'shipped',
+          'bg-success': order.status === 'delivered',
+          'bg-danger':  order.status === 'cancelled'
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
         }">
           {{ getStatusLabel(order.status) }}
         </span>
@@ -31,6 +39,7 @@
               <img :src="item.image" style="width:50px; height:50px; object-fit:cover; margin-right:15px;" />
               <div class="flex-grow-1">
                 <div>{{ item.name }}</div>
+<<<<<<< HEAD
                 <small class="text-muted d-block" v-if="item.size || item.sugarIce || item.toppings?.length">
                   <span v-if="item.size">{{ item.size }}</span>
                   <span v-if="item.sugarIce"> · {{ item.sugarIce }}</span>
@@ -41,6 +50,13 @@
 
               <!-- Nút đánh giá: chỉ hiện khi đơn đã hoàn thành -->
               <div v-if="order.status === 'completed'">
+=======
+                <small class="text-muted">{{ item.quantity }} x {{ formatPrice(item.price) }}</small>
+              </div>
+
+              <!-- Nút đánh giá: chỉ hiện khi đơn đã giao -->
+              <div v-if="order.status === 'delivered'">
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
                 <span v-if="reviewedProducts.has(getProductId(item))" class="badge bg-success">
                   ✓ Đã đánh giá
                 </span>
@@ -56,7 +72,10 @@
           </div>
           <div class="col-md-4">
             <p><strong>Tổng tiền:</strong> {{ formatPrice(order.totalAmount) }}</p>
+<<<<<<< HEAD
             <p><strong>Nhận hàng:</strong> {{ order.deliveryMethod === 'pickup' ? 'Nhận tại quầy' : 'Giao tận nơi' }}</p>
+=======
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
             <p><strong>Phương thức:</strong> {{ order.paymentMethod }}</p>
             <p><strong>Ngày đặt:</strong> {{ new Date(order.createdAt).toLocaleDateString('vi-VN') }}</p>
           </div>
@@ -135,10 +154,17 @@ const getProductId = (item) => item.product?._id || item.product;
 
 const getStatusLabel = (status) => {
   const labels = {
+<<<<<<< HEAD
     new:        'Mới',
     confirmed:  'Đã xác nhận',
     preparing:  'Đang pha chế',
     completed:  'Hoàn thành',
+=======
+    pending:    'Chờ xử lý',
+    processing: 'Đang xử lý',
+    shipped:    'Đang giao',
+    delivered:  'Đã giao',
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
     cancelled:  'Đã hủy'
   };
   return labels[status] || status;
@@ -163,7 +189,11 @@ const loadMyReviews = async () => {
   try {
     const productIds = new Set();
     orders.value.forEach(order => {
+<<<<<<< HEAD
       if (order.status === 'completed') {
+=======
+      if (order.status === 'delivered') {
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
         order.items.forEach(item => productIds.add(getProductId(item)));
       }
     });

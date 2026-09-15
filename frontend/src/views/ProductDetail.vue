@@ -29,7 +29,11 @@
           <span class="text-muted small">{{ product.rating }} ({{ product.reviews }} đánh giá)</span>
         </div>
 
+<<<<<<< HEAD
         <div class="fs-3 fw-bold text-brown mb-3">{{ formatPrice(unitPrice) }}</div>
+=======
+        <div class="fs-3 fw-bold text-brown mb-3">{{ formatPrice(product.price) }}</div>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 
         <p class="text-muted mb-4">{{ product.description }}</p>
 
@@ -40,6 +44,7 @@
 
         <!-- Chọn size ly -->
         <div v-if="product.sizes && product.sizes.length" class="mb-3">
+<<<<<<< HEAD
           <span class="small text-muted d-block mb-2">Size ly: <span class="text-danger">*</span></span>
           <div class="d-flex gap-2 flex-wrap">
             <button
@@ -86,6 +91,34 @@
           <input type="text" class="form-control" v-model="note" placeholder="VD: ít đá, giao trước 12h..." />
         </div>
 
+=======
+          <span class="small text-muted d-block mb-2">Size ly:</span>
+          <div class="d-flex gap-2 flex-wrap">
+            <button
+              v-for="s in product.sizes" :key="s"
+              type="button"
+              class="btn btn-sm"
+              :class="selectedSize === s ? 'btn-brown' : 'btn-outline-secondary'"
+              @click="selectedSize = s"
+            >{{ s }}</button>
+          </div>
+        </div>
+
+        <!-- Chọn tùy chọn thêm -->
+        <div v-if="product.colors && product.colors.length" class="mb-3">
+          <span class="small text-muted d-block mb-2">Tùy chọn:</span>
+          <div class="d-flex gap-2 flex-wrap">
+            <button
+              v-for="c in product.colors" :key="c"
+              type="button"
+              class="btn btn-sm"
+              :class="selectedColor === c ? 'btn-brown' : 'btn-outline-secondary'"
+              @click="selectedColor = c"
+            >{{ c }}</button>
+          </div>
+        </div>
+
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
         <div class="d-flex align-items-center gap-2 mb-4">
           <span class="small text-muted">Tình trạng:</span>
           <span :class="product.stock > 0 ? 'text-success fw-semibold' : 'text-danger fw-semibold'">
@@ -94,7 +127,11 @@
         </div>
 
         <!-- Số lượng + Thêm giỏ -->
+<<<<<<< HEAD
         <div class="d-flex align-items-center gap-3 flex-wrap">
+=======
+        <div class="d-flex align-items-center gap-3">
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
           <div class="input-group" style="width:130px">
             <button class="btn btn-outline-secondary" @click="qty > 1 && qty--">−</button>
             <input type="number" class="form-control text-center" v-model="qty" min="1" :max="product.stock" />
@@ -132,7 +169,11 @@
 </template>
 
 <script setup>
+<<<<<<< HEAD
 import { ref, computed, onMounted, watch } from 'vue';
+=======
+import { ref, onMounted } from 'vue';
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 import { useRoute } from 'vue-router';
 import axios from 'axios';
 import { useCartStore } from '../store/cartStore';
@@ -149,6 +190,7 @@ const product = ref(null);
 const loading = ref(false);
 const qty = ref(1);
 const selectedSize = ref('');
+<<<<<<< HEAD
 const selectedSugarIce = ref('');
 const selectedToppings = ref([]);
 const note = ref('');
@@ -173,16 +215,25 @@ const unitPrice = computed(() => {
   return product.value.price + sizeDelta + toppingsTotal;
 });
 
+=======
+const selectedColor = ref('');
+
+const formatPrice = (p) => (p || 0).toLocaleString('vi-VN') + ' ₫';
+
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 const loadProduct = async () => {
   loading.value = true;
   try {
     const res = await axios.get(`/api/products/${route.params.id}`);
     product.value = res.data;
+<<<<<<< HEAD
     // Mặc định chọn size/đường-đá đầu tiên nếu có
     selectedSize.value = product.value.sizes?.[0]?.name || '';
     selectedSugarIce.value = product.value.sugarIceOptions?.[0] || '';
     selectedToppings.value = [];
     note.value = '';
+=======
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
   } catch {
     product.value = null;
   } finally {
@@ -191,6 +242,7 @@ const loadProduct = async () => {
 };
 
 const addToCart = () => {
+<<<<<<< HEAD
   if (product.value.sizes?.length && !selectedSize.value) {
     alert('Vui lòng chọn size ly!');
     return;
@@ -202,6 +254,9 @@ const addToCart = () => {
     note: note.value,
     unitPrice: unitPrice.value
   });
+=======
+  cart.addItem(product.value, qty.value);
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
   alert(`Đã thêm ${qty.value} "${product.value.name}" vào giỏ hàng!`);
 };
 
@@ -210,7 +265,10 @@ const toggleLike = async () => {
 };
 
 onMounted(loadProduct);
+<<<<<<< HEAD
 watch(() => route.params.id, loadProduct);
+=======
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
 </script>
 
 <style scoped>
@@ -218,4 +276,8 @@ watch(() => route.params.id, loadProduct);
 .btn-brown { background-color: #2b1c12; border-color: #2b1c12; color: white; }
 .btn-brown:hover { background-color: #4a4a4a; color: white; }
 .stars span { font-size: 1rem; }
+<<<<<<< HEAD
 </style>
+=======
+</style>
+>>>>>>> 6644a9b3829b34f1e619ed6d01c457846ddf0d75
