@@ -1,0 +1,262 @@
+/* ============================================================
+   Fonts — Bebas Neue (display) / Be Vietnam Pro (body) / Space Mono (utility)
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Space+Mono:wght@400;700&display=swap');
+
+/* ============================================================
+   Design tokens — "Kinjo Coffee": giấy nến + hạt rang + nâu cà phê + đỏ mọng cherry
+   ============================================================ */
+:root {
+  --ink:          #2a1c12;
+  --ink-soft:     #6b5646;
+  --indigo:       #6f4423;
+  --indigo-deep:  #3e2a17;
+  --hanko:        #b3502c;
+  --paper:        #f8f0e1;
+  --paper-dim:    #efe1c3;
+  --line:         #ddc9a0;
+
+  /* aliases kept for backward-compat across components */
+  --fashion-dark:    var(--ink);
+  --fashion-primary: var(--indigo);
+  --fashion-light:   var(--indigo-deep);
+  --fashion-bg:      var(--paper);
+  --fashion-gold:    var(--hanko);
+
+  --font-display: 'Bebas Neue', 'Be Vietnam Pro', sans-serif;
+  --font-body:    'Be Vietnam Pro', sans-serif;
+  --font-mono:    'Space Mono', monospace;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+body {
+  font-family: var(--font-body);
+  background-color: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  letter-spacing: 0.5px;
+  color: var(--ink);
+}
+.text-white h1, .text-white h2, .text-white h3,
+.text-white h4, .text-white h5, .text-white h6 {
+  color: var(--paper) !important;
+}
+
+/* ============================================================
+   Utility color classes
+   ============================================================ */
+.btn-brown {
+  background-color: var(--indigo);
+  border-color: var(--indigo);
+  color: var(--paper);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.btn-brown:hover, .btn-brown:focus {
+  background-color: var(--indigo-deep);
+  border-color: var(--indigo-deep);
+  color: var(--paper);
+}
+.btn-brown:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.text-brown  { color: var(--indigo) !important; }
+.text-gold   { color: var(--hanko)  !important; }
+.bg-brown    { background-color: var(--indigo) !important; }
+.bg-fashion  { background-color: var(--paper)  !important; }
+.badge-gold  { background-color: var(--hanko); color: var(--paper); }
+
+/* ============================================================
+   Navbar brand
+   ============================================================ */
+.navbar-brand {
+  font-family: var(--font-display);
+  letter-spacing: 2px;
+}
+
+/* ============================================================
+   Mega menu (kept for markup compat, restyled flat/minimal)
+   ============================================================ */
+.dropdown-container { position: relative; }
+.mega-menu {
+  pointer-events: none;
+  position: absolute;
+  top: 100%; left: 0;
+  width: 420px;
+  margin-top: 0;
+  padding: 24px 22px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: 0 18px 32px rgba(23,24,28,0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+  z-index: 1000;
+}
+.dropdown-container:hover .mega-menu,
+.dropdown-container:focus-within .mega-menu {
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.mega-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+.mega-menu-column h6 {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--hanko);
+  margin-bottom: 12px;
+}
+.dropdown-link {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--ink);
+  font-size: 0.93rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.dropdown-link:hover { color: var(--indigo); }
+
+@media (max-width: 991.98px) {
+  .mega-menu {
+    position: static;
+    width: 100%;
+    opacity: 1; visibility: visible;
+    transform: none; pointer-events: auto;
+    box-shadow: none; border: none;
+    background: var(--paper-dim); margin-top: 0;
+  }
+  .mega-menu-grid { grid-template-columns: 1fr; gap: 15px; }
+}
+
+/* ============================================================
+   Chat widget
+   ============================================================ */
+.chat-launcher {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  width: 54px; height: 54px;
+  background: var(--ink);
+  border: 2px solid var(--hanko);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  z-index: 999;
+  transition: transform 0.2s;
+}
+.chat-launcher:hover { transform: scale(1.08); }
+
+/* ============================================================
+   Hero video nền
+   ============================================================ */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+}
+.hero-section video {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(23,24,28,0.55);
+}
+
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--paper-dim); }
+::-webkit-scrollbar-thumb { background: var(--indigo); border-radius: 0; }
+
+/* ============================================================
+   Link mặc định
+   ============================================================ */
+a { text-decoration: none; color: inherit; }
+
+/* ============================================================
+   Hiệu ứng card sản phẩm — phẳng, viền chỉ mảnh, không đổ bóng nặng
+   ============================================================ */
+.card {
+  transition: transform 0.25s ease, border-color 0.25s ease;
+  overflow: visible !important;
+  border: 1px solid var(--line) !important;
+  border-radius: 2px !important;
+  background: var(--paper);
+}
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--indigo) !important;
+  box-shadow: none !important;
+}
+.card .card-img-top {
+  transition: transform 0.4s ease;
+  border-radius: 0;
+  overflow: hidden;
+}
+.card:hover .card-img-top {
+  transform: scale(1.03);
+}
+
+/* ============================================================
+   Fade-in khi scroll
+   ============================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fade-in:nth-child(2) { transition-delay: 0.08s; }
+.fade-in:nth-child(3) { transition-delay: 0.16s; }
+.fade-in:nth-child(4) { transition-delay: 0.24s; }
+.fade-in:nth-child(5) { transition-delay: 0.32s; }
+.fade-in:nth-child(6) { transition-delay: 0.4s; }
+
+/* ============================================================
+   Con dấu Hanko — chi tiết nhận diện thương hiệu
+   ============================================================ */
+.hanko-stamp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  border: 2px solid var(--hanko);
+  color: var(--hanko);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+  transform: rotate(-8deg);
+  flex-shrink: 0;
+}
